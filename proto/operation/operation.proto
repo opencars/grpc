@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package operation;
+
+option go_package = "github.com/opencars/grpc/pkg/operation";
+
+enum Fuel {
+    UNKNOWN     = 0;
+    GASOLINE    = 1;
+    GAS         = 2;
+    ELECTRICITY = 3;
+}
+
+message Department {
+    int32  code = 1;
+    string name = 2;
+}
+
+message Owner {
+    enum Entity {
+        UNKNOWN    = 0;
+        INDIVIDUAL = 1;
+        LEGAL      = 2;
+    }
+
+    message Territory {
+        int32 code      = 1;
+        int32 full_name = 2;
+    }
+
+    Entity entity           = 1;
+    Territory registration  = 2;
+}
+
+message Record {
+    string brand = 1;
+    string model = 2;
+    string body = 3;
+    int32 capacity = 4;
+    string color = 5;
+    string date = 6;
+    Department department = 7;
+    repeated Fuel fuel = 8;
+    string kind = 9;
+    string number = 10;
+    int32  own_weight = 11;
+    Owner owner = 12;
+    string purpose = 14;
+    string reg_addr_koatuu = 15;
+    string registration = 16;
+    string registration_code = 17;
+    int32  total_weight = 18;
+    int32  year = 19;
+}

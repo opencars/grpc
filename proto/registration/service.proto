@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package registration;
+
+option go_package = "github.com/opencars/grpc/pkg/registration";
+
+import "proto/registration/registration.proto";
+
+service VehicleService {
+    rpc FindByNumber (FindByNumberRequest) returns (RegistrationResponse) {}
+    rpc FindByVIN (FindByVINRequest) returns (RegistrationResponse) {}
+    rpc FindByCode (FindByCodeRequest) returns (RegistrationResponse) {}
+}
+
+message FindByNumberRequest {
+	string number = 1;
+}
+
+message FindByVINRequest {
+	string vin = 1;
+}
+
+message FindByCodeRequest {
+	string code = 1;
+}
+
+message RegistrationResponse {
+    repeated Registration registrations = 1;
+}
