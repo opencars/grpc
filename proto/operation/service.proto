@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package operation;
+
+option go_package = "github.com/opencars/grpc/pkg/operation";
+
+import "proto/operation/operation.proto";
+
+service Service {
+    rpc FindByNumber (NumberRequest) returns (Response) {}
+}
+
+message NumberRequest {
+	string number = 1;
+}
+
+message Response {
+    repeated Record operations = 1;
+}

@@ -4,8 +4,6 @@ package backoffice;
 
 option go_package = "github.com/opencars/grpc/pkg/backoffice";
 
-import "google/protobuf/timestamp.proto";
-
 service CustomerService {
   rpc FindById (FindByIdRequest) returns (Customer) {}
 }
