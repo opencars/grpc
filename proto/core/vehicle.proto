@@ -4,8 +4,6 @@ package backoffice;
 
 option go_package = "github.com/opencars/grpc/pkg/core";
 
-import "proto/operation/operation.proto";
-
 service VehicleService {
   rpc FindByNumber (FindByNumberRequest) returns (Vehicle) {}
 }
