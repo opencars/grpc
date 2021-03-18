@@ -1,15 +1,38 @@
 syntax = "proto3";
 
-package backoffice;
+package core;
 
 option go_package = "github.com/opencars/grpc/pkg/core";
 
+import "proto/common/date.proto";
+
+import "proto/operation/operation.proto";
+import "proto/registration/registration.proto";
+
 service VehicleService {
-  rpc FindByNumber (FindByNumberRequest) returns (Vehicle) {}
+  rpc FindByNumber (NumberRequest) returns (Result) {}
+  rpc FindByVIN (VINRequest) returns (Result) {}
 }
 
-message FindByNumberRequest {
+message NumberRequest {
 	string number = 1;
 }
 
-message Vehicle {}
+message VINRequest {
+	string vin = 1;
+}
+
+message Vehicle {
+  string      vin            = 1;
+  common.Date first_reg_date = 2;
+  string      brand          = 3;
+  string      model          = 4;
+  int32       year           = 5;
+
+  repeated registration.Record registrations = 6;
+  repeated operation.Record    operations    = 7;
+}
+
+message Result {
+  map<string, Vehicle> vehicles = 1;
+}

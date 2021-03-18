@@ -17,7 +17,8 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type VehicleServiceClient interface {
-	FindByNumber(ctx context.Context, in *FindByNumberRequest, opts ...grpc.CallOption) (*Vehicle, error)
+	FindByNumber(ctx context.Context, in *NumberRequest, opts ...grpc.CallOption) (*Result, error)
+	FindByVIN(ctx context.Context, in *VINRequest, opts ...grpc.CallOption) (*Result, error)
 }
 
 type vehicleServiceClient struct {
@@ -28,9 +29,18 @@ func NewVehicleServiceClient(cc grpc.ClientConnInterface) VehicleServiceClient {
 	return &vehicleServiceClient{cc}
 }
 
-func (c *vehicleServiceClient) FindByNumber(ctx context.Context, in *FindByNumberRequest, opts ...grpc.CallOption) (*Vehicle, error) {
-	out := new(Vehicle)
-	err := c.cc.Invoke(ctx, "/backoffice.VehicleService/FindByNumber", in, out, opts...)
+func (c *vehicleServiceClient) FindByNumber(ctx context.Context, in *NumberRequest, opts ...grpc.CallOption) (*Result, error) {
+	out := new(Result)
+	err := c.cc.Invoke(ctx, "/core.VehicleService/FindByNumber", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vehicleServiceClient) FindByVIN(ctx context.Context, in *VINRequest, opts ...grpc.CallOption) (*Result, error) {
+	out := new(Result)
+	err := c.cc.Invoke(ctx, "/core.VehicleService/FindByVIN", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +51,8 @@ func (c *vehicleServiceClient) FindByNumber(ctx context.Context, in *FindByNumbe
 // All implementations must embed UnimplementedVehicleServiceServer
 // for forward compatibility
 type VehicleServiceServer interface {
-	FindByNumber(context.Context, *FindByNumberRequest) (*Vehicle, error)
+	FindByNumber(context.Context, *NumberRequest) (*Result, error)
+	FindByVIN(context.Context, *VINRequest) (*Result, error)
 	mustEmbedUnimplementedVehicleServiceServer()
 }
 
@@ -49,8 +60,11 @@ type VehicleServiceServer interface {
 type UnimplementedVehicleServiceServer struct {
 }
 
-func (*UnimplementedVehicleServiceServer) FindByNumber(context.Context, *FindByNumberRequest) (*Vehicle, error) {
+func (*UnimplementedVehicleServiceServer) FindByNumber(context.Context, *NumberRequest) (*Result, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FindByNumber not implemented")
+}
+func (*UnimplementedVehicleServiceServer) FindByVIN(context.Context, *VINRequest) (*Result, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FindByVIN not implemented")
 }
 func (*UnimplementedVehicleServiceServer) mustEmbedUnimplementedVehicleServiceServer() {}
 
@@ -59,7 +73,7 @@ func RegisterVehicleServiceServer(s *grpc.Server, srv VehicleServiceServer) {
 }
 
 func _VehicleService_FindByNumber_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FindByNumberRequest)
+	in := new(NumberRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -68,21 +82,43 @@ func _VehicleService_FindByNumber_Handler(srv interface{}, ctx context.Context, 
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/backoffice.VehicleService/FindByNumber",
+		FullMethod: "/core.VehicleService/FindByNumber",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VehicleServiceServer).FindByNumber(ctx, req.(*FindByNumberRequest))
+		return srv.(VehicleServiceServer).FindByNumber(ctx, req.(*NumberRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VehicleService_FindByVIN_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(VINRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VehicleServiceServer).FindByVIN(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/core.VehicleService/FindByVIN",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VehicleServiceServer).FindByVIN(ctx, req.(*VINRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 var _VehicleService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "backoffice.VehicleService",
+	ServiceName: "core.VehicleService",
 	HandlerType: (*VehicleServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "FindByNumber",
 			Handler:    _VehicleService_FindByNumber_Handler,
+		},
+		{
+			MethodName: "FindByVIN",
+			Handler:    _VehicleService_FindByVIN_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
