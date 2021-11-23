@@ -11,7 +11,8 @@ import (
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
-const _ = grpc.SupportPackageIsVersion6
+// Requires gRPC-Go v1.32.0 or later.
+const _ = grpc.SupportPackageIsVersion7
 
 // VehicleServiceClient is the client API for VehicleService service.
 //
@@ -60,16 +61,23 @@ type VehicleServiceServer interface {
 type UnimplementedVehicleServiceServer struct {
 }
 
-func (*UnimplementedVehicleServiceServer) FindByNumber(context.Context, *NumberRequest) (*Result, error) {
+func (UnimplementedVehicleServiceServer) FindByNumber(context.Context, *NumberRequest) (*Result, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FindByNumber not implemented")
 }
-func (*UnimplementedVehicleServiceServer) FindByVIN(context.Context, *VINRequest) (*Result, error) {
+func (UnimplementedVehicleServiceServer) FindByVIN(context.Context, *VINRequest) (*Result, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FindByVIN not implemented")
 }
-func (*UnimplementedVehicleServiceServer) mustEmbedUnimplementedVehicleServiceServer() {}
+func (UnimplementedVehicleServiceServer) mustEmbedUnimplementedVehicleServiceServer() {}
 
-func RegisterVehicleServiceServer(s *grpc.Server, srv VehicleServiceServer) {
-	s.RegisterService(&_VehicleService_serviceDesc, srv)
+// UnsafeVehicleServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to VehicleServiceServer will
+// result in compilation errors.
+type UnsafeVehicleServiceServer interface {
+	mustEmbedUnimplementedVehicleServiceServer()
+}
+
+func RegisterVehicleServiceServer(s grpc.ServiceRegistrar, srv VehicleServiceServer) {
+	s.RegisterService(&VehicleService_ServiceDesc, srv)
 }
 
 func _VehicleService_FindByNumber_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -108,7 +116,10 @@ func _VehicleService_FindByVIN_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-var _VehicleService_serviceDesc = grpc.ServiceDesc{
+// VehicleService_ServiceDesc is the grpc.ServiceDesc for VehicleService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var VehicleService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "core.VehicleService",
 	HandlerType: (*VehicleServiceServer)(nil),
 	Methods: []grpc.MethodDesc{

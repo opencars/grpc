@@ -11,7 +11,8 @@ import (
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
-const _ = grpc.SupportPackageIsVersion6
+// Requires gRPC-Go v1.32.0 or later.
+const _ = grpc.SupportPackageIsVersion7
 
 // CustomerServiceClient is the client API for CustomerService service.
 //
@@ -49,13 +50,20 @@ type CustomerServiceServer interface {
 type UnimplementedCustomerServiceServer struct {
 }
 
-func (*UnimplementedCustomerServiceServer) FindById(context.Context, *FindByIdRequest) (*Customer, error) {
+func (UnimplementedCustomerServiceServer) FindById(context.Context, *FindByIdRequest) (*Customer, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FindById not implemented")
 }
-func (*UnimplementedCustomerServiceServer) mustEmbedUnimplementedCustomerServiceServer() {}
+func (UnimplementedCustomerServiceServer) mustEmbedUnimplementedCustomerServiceServer() {}
 
-func RegisterCustomerServiceServer(s *grpc.Server, srv CustomerServiceServer) {
-	s.RegisterService(&_CustomerService_serviceDesc, srv)
+// UnsafeCustomerServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to CustomerServiceServer will
+// result in compilation errors.
+type UnsafeCustomerServiceServer interface {
+	mustEmbedUnimplementedCustomerServiceServer()
+}
+
+func RegisterCustomerServiceServer(s grpc.ServiceRegistrar, srv CustomerServiceServer) {
+	s.RegisterService(&CustomerService_ServiceDesc, srv)
 }
 
 func _CustomerService_FindById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -76,7 +84,10 @@ func _CustomerService_FindById_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-var _CustomerService_serviceDesc = grpc.ServiceDesc{
+// CustomerService_ServiceDesc is the grpc.ServiceDesc for CustomerService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var CustomerService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "backoffice.CustomerService",
 	HandlerType: (*CustomerServiceServer)(nil),
 	Methods: []grpc.MethodDesc{

@@ -11,13 +11,15 @@ import (
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
-const _ = grpc.SupportPackageIsVersion6
+// Requires gRPC-Go v1.32.0 or later.
+const _ = grpc.SupportPackageIsVersion7
 
 // ServiceClient is the client API for Service service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ServiceClient interface {
 	FindByNumber(ctx context.Context, in *NumberRequest, opts ...grpc.CallOption) (*Response, error)
+	FindByVin(ctx context.Context, in *NumberRequest, opts ...grpc.CallOption) (*Response, error)
 }
 
 type serviceClient struct {
@@ -37,11 +39,21 @@ func (c *serviceClient) FindByNumber(ctx context.Context, in *NumberRequest, opt
 	return out, nil
 }
 
+func (c *serviceClient) FindByVin(ctx context.Context, in *NumberRequest, opts ...grpc.CallOption) (*Response, error) {
+	out := new(Response)
+	err := c.cc.Invoke(ctx, "/operation.Service/FindByVin", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ServiceServer is the server API for Service service.
 // All implementations must embed UnimplementedServiceServer
 // for forward compatibility
 type ServiceServer interface {
 	FindByNumber(context.Context, *NumberRequest) (*Response, error)
+	FindByVin(context.Context, *NumberRequest) (*Response, error)
 	mustEmbedUnimplementedServiceServer()
 }
 
@@ -49,13 +61,23 @@ type ServiceServer interface {
 type UnimplementedServiceServer struct {
 }
 
-func (*UnimplementedServiceServer) FindByNumber(context.Context, *NumberRequest) (*Response, error) {
+func (UnimplementedServiceServer) FindByNumber(context.Context, *NumberRequest) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FindByNumber not implemented")
 }
-func (*UnimplementedServiceServer) mustEmbedUnimplementedServiceServer() {}
+func (UnimplementedServiceServer) FindByVin(context.Context, *NumberRequest) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FindByVin not implemented")
+}
+func (UnimplementedServiceServer) mustEmbedUnimplementedServiceServer() {}
 
-func RegisterServiceServer(s *grpc.Server, srv ServiceServer) {
-	s.RegisterService(&_Service_serviceDesc, srv)
+// UnsafeServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ServiceServer will
+// result in compilation errors.
+type UnsafeServiceServer interface {
+	mustEmbedUnimplementedServiceServer()
+}
+
+func RegisterServiceServer(s grpc.ServiceRegistrar, srv ServiceServer) {
+	s.RegisterService(&Service_ServiceDesc, srv)
 }
 
 func _Service_FindByNumber_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -76,13 +98,38 @@ func _Service_FindByNumber_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
-var _Service_serviceDesc = grpc.ServiceDesc{
+func _Service_FindByVin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NumberRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServiceServer).FindByVin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/operation.Service/FindByVin",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServiceServer).FindByVin(ctx, req.(*NumberRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// Service_ServiceDesc is the grpc.ServiceDesc for Service service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var Service_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "operation.Service",
 	HandlerType: (*ServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "FindByNumber",
 			Handler:    _Service_FindByNumber_Handler,
+		},
+		{
+			MethodName: "FindByVin",
+			Handler:    _Service_FindByVin_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
