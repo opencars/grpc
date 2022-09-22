@@ -34,5 +34,5 @@ message Vehicle {
 }
 
 message Result {
-  map<string, Vehicle> vehicles = 1;
+  repeated Vehicle vehicles = 1;
 }
