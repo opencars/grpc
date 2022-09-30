@@ -5,19 +5,19 @@ package backoffice;
 option go_package = "github.com/opencars/grpc/pkg/backoffice";
 
 service CustomerService {
-  rpc FindById (FindByIdRequest) returns (Customer) {}
+    rpc FindById(FindByIdRequest) returns (Customer) {}
 }
 
 message FindByIdRequest {
-	string id = 1;
+    string id = 1;
 }
 
 message Customer {
-  string id             = 1;
-  string name           = 2;
-  string contact_person = 3;
+    string id             = 1;
+    string name           = 2;
+    string contact_person = 3;
 }
 
 message CustomerRequest {
-  string id = 1;
+    string id = 1;
 }

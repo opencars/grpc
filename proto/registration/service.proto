@@ -7,21 +7,21 @@ option go_package = "github.com/opencars/grpc/pkg/registration";
 import "proto/registration/registration.proto";
 
 service Service {
-    rpc FindByNumber (NumberRequest) returns (Response) {}
-    rpc FindByVIN (VINRequest) returns (Response) {}
-    rpc FindByCode (CodeRequest) returns (Response) {}
+    rpc FindByNumber(NumberRequest) returns (Response) {}
+    rpc FindByVIN(VINRequest) returns (Response) {}
+    rpc FindByCode(CodeRequest) returns (Response) {}
 }
 
 message NumberRequest {
-	string number = 1;
+    string number = 1;
 }
 
 message VINRequest {
-	string vin = 1;
+    string vin = 1;
 }
 
 message CodeRequest {
-	string code = 1;
+    string code = 1;
 }
 
 message Response {

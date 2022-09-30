@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package koatuu;
+
+option go_package = "github.com/opencars/grpc/pkg/koatuu";
+
+service Service {
+    rpc Decode(DecodeRequest) returns (DecodeResultList);
+}
+
+message DecodeRequest {
+    repeated string codes = 1;
+}
+
+message DecodeResultList {
+    repeated DecodeResultItem items = 1;
+}
+
+message DecodeResultItem {
+    string summary = 1;
+}
