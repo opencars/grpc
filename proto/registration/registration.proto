@@ -4,7 +4,6 @@ package registration;
 
 option go_package = "github.com/opencars/grpc/pkg/registration";
 
-// import "proto/common/enums.proto";
 import "proto/common/date.proto";
 
 message Record {
