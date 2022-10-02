@@ -7,12 +7,12 @@ option go_package = "github.com/opencars/grpc/pkg/operation";
 import "proto/operation/operation.proto";
 
 service Service {
-    rpc FindByNumber (NumberRequest) returns (Response) {}
-    rpc FindByVin (NumberRequest) returns (Response) {}
+    rpc FindByNumber(NumberRequest) returns (Response) {}
+    rpc FindByVin(NumberRequest) returns (Response) {}
 }
 
 message NumberRequest {
-	string number = 1;
+    string number = 1;
 }
 
 message VinRequest {

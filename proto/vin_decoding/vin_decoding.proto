@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package vin_decoding;
+
+option go_package = "github.com/opencars/grpc/pkg/vin_decoding";
+
+import "proto/common/error.proto";
+
+service Service {
+    rpc Decode(DecodeRequest) returns (DecodeResultList);
+}
+
+message DecodeRequest {
+    repeated string vins = 1;
+}
+
+message DecodeResultList {
+    repeated DecodeResultItem items = 1;
+}
+
+message DecodeResultItem {
+    Vehicle vehicle        = 1;
+    DecodedVIN decoded_vin = 2;
+    common.Error error     = 3;
+}
+
+message DecodedVIN {
+    string vds = 1;
+    string vis = 2;
+    string wmi = 3;
+}
+
+message Vehicle {
+    bool check          = 1;
+    string country      = 2;
+    string manufacturer = 3;
+    string region       = 4;
+    uint32 year         = 5;
+}
