@@ -8,6 +8,7 @@ import "proto/common/date.proto";
 
 import "proto/operation/operation.proto";
 import "proto/registration/registration.proto";
+import "proto/vin_decoding/vin_decoding.proto";
 
 service VehicleService {
     rpc FindByNumber(NumberRequest) returns (Result) {}
@@ -22,8 +23,14 @@ message VINRequest {
     string vin = 1;
 }
 
+message Vin {
+    string value                        = 1;
+    vin_decoding.Vehicle vehicle        = 2;
+    vin_decoding.DecodedVIN decoded_vin = 3;
+}
+
 message Vehicle {
-    string vin                 = 1;
+    Vin vin                    = 1;
     common.Date first_reg_date = 2;
     string brand               = 3;
     string model               = 4;
