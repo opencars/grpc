@@ -19,6 +19,7 @@ message DecodeResultList {
 }
 
 message DecodeResultItem {
-    string summary     = 1;
-    common.Error error = 3;
+    string summary        = 1;
+    repeated string parts = 2;
+    common.Error error    = 3;
 }
