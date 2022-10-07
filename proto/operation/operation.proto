@@ -20,7 +20,7 @@ message Owner {
 
     message Territory {
         string code    = 1;
-        string summart = 2;
+        string summary = 2;
     }
 
     Entity entity          = 1;
