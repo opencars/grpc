@@ -114,53 +114,6 @@ func (x *VINRequest) GetVin() string {
 	return ""
 }
 
-type VinRequest struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Vin string `protobuf:"bytes,1,opt,name=vin,proto3" json:"vin,omitempty"`
-}
-
-func (x *VinRequest) Reset() {
-	*x = VinRequest{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_operation_service_proto_msgTypes[2]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *VinRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*VinRequest) ProtoMessage() {}
-
-func (x *VinRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_operation_service_proto_msgTypes[2]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use VinRequest.ProtoReflect.Descriptor instead.
-func (*VinRequest) Descriptor() ([]byte, []int) {
-	return file_proto_operation_service_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *VinRequest) GetVin() string {
-	if x != nil {
-		return x.Vin
-	}
-	return ""
-}
-
 type Response struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -172,7 +125,7 @@ type Response struct {
 func (x *Response) Reset() {
 	*x = Response{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_operation_service_proto_msgTypes[3]
+		mi := &file_proto_operation_service_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -185,7 +138,7 @@ func (x *Response) String() string {
 func (*Response) ProtoMessage() {}
 
 func (x *Response) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_operation_service_proto_msgTypes[3]
+	mi := &file_proto_operation_service_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -198,7 +151,7 @@ func (x *Response) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Response.ProtoReflect.Descriptor instead.
 func (*Response) Descriptor() ([]byte, []int) {
-	return file_proto_operation_service_proto_rawDescGZIP(), []int{3}
+	return file_proto_operation_service_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *Response) GetOperations() []*Record {
@@ -220,8 +173,6 @@ var file_proto_operation_service_proto_rawDesc = []byte{
 	0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x6e, 0x75,
 	0x6d, 0x62, 0x65, 0x72, 0x22, 0x1e, 0x0a, 0x0a, 0x56, 0x49, 0x4e, 0x52, 0x65, 0x71, 0x75, 0x65,
 	0x73, 0x74, 0x12, 0x10, 0x0a, 0x03, 0x76, 0x69, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x03, 0x76, 0x69, 0x6e, 0x22, 0x1e, 0x0a, 0x0a, 0x56, 0x69, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65,
-	0x73, 0x74, 0x12, 0x10, 0x0a, 0x03, 0x76, 0x69, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x03, 0x76, 0x69, 0x6e, 0x22, 0x3d, 0x0a, 0x08, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
 	0x12, 0x31, 0x0a, 0x0a, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x01,
 	0x20, 0x03, 0x28, 0x0b, 0x32, 0x11, 0x2e, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e,
@@ -231,7 +182,7 @@ var file_proto_operation_service_proto_rawDesc = []byte{
 	0x18, 0x2e, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x4e, 0x75, 0x6d, 0x62,
 	0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x13, 0x2e, 0x6f, 0x70, 0x65, 0x72,
 	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00,
-	0x12, 0x39, 0x0a, 0x09, 0x46, 0x69, 0x6e, 0x64, 0x42, 0x79, 0x56, 0x69, 0x6e, 0x12, 0x15, 0x2e,
+	0x12, 0x39, 0x0a, 0x09, 0x46, 0x69, 0x6e, 0x64, 0x42, 0x79, 0x56, 0x49, 0x4e, 0x12, 0x15, 0x2e,
 	0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x56, 0x49, 0x4e, 0x52, 0x65, 0x71,
 	0x75, 0x65, 0x73, 0x74, 0x1a, 0x13, 0x2e, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e,
 	0x2e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0x28, 0x5a, 0x26, 0x67,
@@ -252,20 +203,19 @@ func file_proto_operation_service_proto_rawDescGZIP() []byte {
 	return file_proto_operation_service_proto_rawDescData
 }
 
-var file_proto_operation_service_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_proto_operation_service_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_proto_operation_service_proto_goTypes = []interface{}{
 	(*NumberRequest)(nil), // 0: operation.NumberRequest
 	(*VINRequest)(nil),    // 1: operation.VINRequest
-	(*VinRequest)(nil),    // 2: operation.VinRequest
-	(*Response)(nil),      // 3: operation.Response
-	(*Record)(nil),        // 4: operation.Record
+	(*Response)(nil),      // 2: operation.Response
+	(*Record)(nil),        // 3: operation.Record
 }
 var file_proto_operation_service_proto_depIdxs = []int32{
-	4, // 0: operation.Response.operations:type_name -> operation.Record
+	3, // 0: operation.Response.operations:type_name -> operation.Record
 	0, // 1: operation.Service.FindByNumber:input_type -> operation.NumberRequest
-	1, // 2: operation.Service.FindByVin:input_type -> operation.VINRequest
-	3, // 3: operation.Service.FindByNumber:output_type -> operation.Response
-	3, // 4: operation.Service.FindByVin:output_type -> operation.Response
+	1, // 2: operation.Service.FindByVIN:input_type -> operation.VINRequest
+	2, // 3: operation.Service.FindByNumber:output_type -> operation.Response
+	2, // 4: operation.Service.FindByVIN:output_type -> operation.Response
 	3, // [3:5] is the sub-list for method output_type
 	1, // [1:3] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
@@ -305,18 +255,6 @@ func file_proto_operation_service_proto_init() {
 			}
 		}
 		file_proto_operation_service_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*VinRequest); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_proto_operation_service_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Response); i {
 			case 0:
 				return &v.state
@@ -335,7 +273,7 @@ func file_proto_operation_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_proto_operation_service_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
