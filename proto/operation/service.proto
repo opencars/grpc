@@ -8,11 +8,15 @@ import "proto/operation/operation.proto";
 
 service Service {
     rpc FindByNumber(NumberRequest) returns (Response) {}
-    rpc FindByVin(NumberRequest) returns (Response) {}
+    rpc FindByVin(VINRequest) returns (Response) {}
 }
 
 message NumberRequest {
     string number = 1;
+}
+
+message VINRequest {
+    string vin = 1;
 }
 
 message VinRequest {

@@ -19,7 +19,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ServiceClient interface {
 	FindByNumber(ctx context.Context, in *NumberRequest, opts ...grpc.CallOption) (*Response, error)
-	FindByVin(ctx context.Context, in *NumberRequest, opts ...grpc.CallOption) (*Response, error)
+	FindByVin(ctx context.Context, in *VINRequest, opts ...grpc.CallOption) (*Response, error)
 }
 
 type serviceClient struct {
@@ -39,7 +39,7 @@ func (c *serviceClient) FindByNumber(ctx context.Context, in *NumberRequest, opt
 	return out, nil
 }
 
-func (c *serviceClient) FindByVin(ctx context.Context, in *NumberRequest, opts ...grpc.CallOption) (*Response, error) {
+func (c *serviceClient) FindByVin(ctx context.Context, in *VINRequest, opts ...grpc.CallOption) (*Response, error) {
 	out := new(Response)
 	err := c.cc.Invoke(ctx, "/operation.Service/FindByVin", in, out, opts...)
 	if err != nil {
@@ -53,7 +53,7 @@ func (c *serviceClient) FindByVin(ctx context.Context, in *NumberRequest, opts .
 // for forward compatibility
 type ServiceServer interface {
 	FindByNumber(context.Context, *NumberRequest) (*Response, error)
-	FindByVin(context.Context, *NumberRequest) (*Response, error)
+	FindByVin(context.Context, *VINRequest) (*Response, error)
 	mustEmbedUnimplementedServiceServer()
 }
 
@@ -64,7 +64,7 @@ type UnimplementedServiceServer struct {
 func (UnimplementedServiceServer) FindByNumber(context.Context, *NumberRequest) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FindByNumber not implemented")
 }
-func (UnimplementedServiceServer) FindByVin(context.Context, *NumberRequest) (*Response, error) {
+func (UnimplementedServiceServer) FindByVin(context.Context, *VINRequest) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FindByVin not implemented")
 }
 func (UnimplementedServiceServer) mustEmbedUnimplementedServiceServer() {}
@@ -99,7 +99,7 @@ func _Service_FindByNumber_Handler(srv interface{}, ctx context.Context, dec fun
 }
 
 func _Service_FindByVin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(NumberRequest)
+	in := new(VINRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -111,7 +111,7 @@ func _Service_FindByVin_Handler(srv interface{}, ctx context.Context, dec func(i
 		FullMethod: "/operation.Service/FindByVin",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceServer).FindByVin(ctx, req.(*NumberRequest))
+		return srv.(ServiceServer).FindByVin(ctx, req.(*VINRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
