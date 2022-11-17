@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package alpr;
+
+option go_package = "github.com/opencars/grpc/pkg/alpr";
+
+import "google/protobuf/timestamp.proto";
+
+service Service {
+    rpc FindByNumber(NumberRequest) returns (Response) {}
+}
+
+message NumberRequest {
+    string number = 1;
+}
+
+message Response {
+    repeated Recognition recognitions = 1;
+}
+
+message Recognition {
+    string id                            = 1;
+    string image_url                     = 2;
+    string number                        = 3;
+    google.protobuf.Timestamp created_at = 4;
+}
