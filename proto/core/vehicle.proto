@@ -38,6 +38,7 @@ message Vehicle {
 
     repeated registration.Record registrations = 6;
     repeated operation.Record operations       = 7;
+    repeated Advertisement advertisements      = 8;
 }
 
 message Result {
