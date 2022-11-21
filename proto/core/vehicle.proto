@@ -43,3 +43,74 @@ message Vehicle {
 message Result {
     repeated Vehicle vehicles = 1;
 }
+
+message Advertisement {
+    enum FuelType {
+        FUEL_UNKNOWN      = 0;
+        FUEL_GASOLINE     = 1;
+        FUEL_DIESEL       = 2;
+        FUEL_GAS          = 3;
+        FUEL_GAS_GASOLINE = 4;
+        FUEL_HYBRID       = 5;
+        FUEL_ELECTRIC     = 6;
+        FUEL_PROPANE      = 7;
+        FUEL_METHANE      = 8;
+        FUEL_OTHER        = 9;
+    }
+
+    enum GearboxType {
+        GEARBOX_UKNOWN    = 0;
+        GEARBOX_AUTOMATIC = 1;
+        GEARBOX_MANUAL    = 2;
+        GEARBOX_MANUMATIC = 3;
+        GEARBOX_VARIATOR  = 4;
+        GEARBOX_AMT       = 5;
+        GEARBOX_OTHER     = 6;
+    }
+
+    enum WheelDriveType {
+        WHEELDRIVE_UNKNOWN = 0;
+        WHEELDRIVE_REAR    = 1;
+        WHEELDRIVE_FRONT   = 2;
+        WHEELDRIVE_ALL     = 3;
+    }
+
+    enum Category {
+        CATEGORY_UNKNOWN = 0;
+        CATEGORY_CAR     = 1;
+        CATEGORY_TRUCK   = 2;
+        CATEGORY_MOTO    = 3;
+        CATEGORY_BUS     = 4;
+        CATEGORY_WATER   = 5;
+        CATEGORY_AIR     = 6;
+        CATEGORY_CAMPER  = 7;
+        CATEGORY_TRAILER = 8;
+        CATEGORY_SPECIAL = 9;
+    }
+
+    uint32 id                       = 1;
+    string resource                 = 2;
+    string brand                    = 3;
+    string model                    = 4;
+    Category category               = 5;
+    string title                    = 6;
+    bool is_verified                = 7;
+    string url                      = 8;
+    uint32 price                    = 9;
+    repeated string image_urls      = 10;
+    uint32 last_seen_at             = 11;
+    uint32 published_at             = 12;
+    uint32 scraped_at               = 13;
+    uint32 updated_at               = 14;
+    uint32 year                     = 15;
+    GearboxType gearbox             = 16;
+    WheelDriveType wheel_drive      = 17;
+    double engine_capacity          = 18;
+    FuelType fuel                   = 19;
+    uint32 mileage                  = 20;
+    string body                     = 21;
+    bool is_customs_cleared         = 22;
+    string vin                      = 23;
+    string registration_number_page = 24;
+    uint32 id_on_resource           = 25;
+}
