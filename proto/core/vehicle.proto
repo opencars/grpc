@@ -89,6 +89,21 @@ message Advertisement {
         CATEGORY_SPECIAL = 9;
     }
 
+    enum BodyType {
+        BODY_UNKNOWN     = 0;
+        BODY_SEDAN       = 1;
+        BODY_CROSSOVER   = 2;
+        BODY_MINIVAN     = 3;
+        BODY_HATCHBACK   = 4;
+        BODY_WAGON       = 5;
+        BODY_COUPE       = 6;
+        BODY_CONVERTIBLE = 7;
+        BODY_PICKUP      = 8;
+        BODY_LIMOUSINE   = 9;
+        BODY_LIGHTTRUCK  = 10;
+        BODY_OTHER       = 11;
+    }
+
     uint32 id                       = 1;
     string resource                 = 2;
     string brand                    = 3;
@@ -109,7 +124,7 @@ message Advertisement {
     double engine_capacity          = 18;
     FuelType fuel                   = 19;
     uint32 mileage                  = 20;
-    string body                     = 21;
+    BodyType body                   = 21;
     bool is_customs_cleared         = 22;
     string vin                      = 23;
     string registration_number_page = 24;
