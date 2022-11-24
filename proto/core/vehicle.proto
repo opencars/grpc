@@ -4,6 +4,7 @@ package core;
 
 option go_package = "github.com/opencars/grpc/pkg/core";
 
+import "google/protobuf/timestamp.proto";
 import "proto/common/date.proto";
 
 import "proto/operation/operation.proto";
@@ -104,29 +105,28 @@ message Advertisement {
         BODY_OTHER       = 11;
     }
 
-    uint32 id                       = 1;
-    string resource                 = 2;
-    string brand                    = 3;
-    string model                    = 4;
-    Category category               = 5;
-    string title                    = 6;
-    bool is_verified                = 7;
-    string url                      = 8;
-    uint32 price                    = 9;
-    repeated string image_urls      = 10;
-    uint32 last_seen_at             = 11;
-    uint32 published_at             = 12;
-    uint32 scraped_at               = 13;
-    uint32 updated_at               = 14;
-    uint32 year                     = 15;
-    GearboxType gearbox             = 16;
-    WheelDriveType wheel_drive      = 17;
-    double engine_capacity          = 18;
-    FuelType fuel                   = 19;
-    uint32 mileage                  = 20;
-    BodyType body                   = 21;
-    bool is_customs_cleared         = 22;
-    string vin                      = 23;
-    string registration_number_page = 24;
-    uint32 id_on_resource           = 25;
+    uint32 id                              = 1;
+    string resource                        = 2;
+    string brand                           = 3;
+    string model                           = 4;
+    Category category                      = 5;
+    string title                           = 6;
+    bool is_verified                       = 7;
+    string url                             = 8;
+    uint32 price                           = 9;
+    repeated string image_urls             = 10;
+    google.protobuf.Timestamp last_seen_at = 11;
+    google.protobuf.Timestamp published_at = 12;
+    google.protobuf.Timestamp scraped_at   = 13;
+    google.protobuf.Timestamp updated_at   = 14;
+    uint32 year                            = 15;
+    GearboxType gearbox                    = 16;
+    WheelDriveType wheel_drive             = 17;
+    double engine_capacity                 = 18;
+    FuelType fuel                          = 19;
+    uint32 mileage                         = 20;
+    BodyType body                          = 21;
+    bool is_customs_cleared                = 22;
+    string vin                             = 23;
+    string number                          = 24;
 }
