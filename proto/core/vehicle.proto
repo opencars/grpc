@@ -11,6 +11,8 @@ import "proto/operation/operation.proto";
 import "proto/registration/registration.proto";
 import "proto/vin_decoding/vin_decoding.proto";
 
+import "proto/core/action.proto";
+
 service VehicleService {
     rpc FindByNumber(NumberRequest) returns (Result) {}
     rpc FindByVIN(VINRequest) returns (Result) {}
@@ -40,6 +42,7 @@ message Vehicle {
     repeated registration.Record registrations = 6;
     repeated operation.Record operations       = 7;
     repeated Advertisement advertisements      = 8;
+    repeated Action actions = 9;
 }
 
 message Result {

@@ -18,6 +18,7 @@ message Record {
     string color       = 8;
     string fuel        = 9;
     string kind        = 10;
+    string body        = 17;
     int32 num_seating  = 11;
     int32 own_weight   = 12;
     int32 total_weight = 13;
