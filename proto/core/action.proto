@@ -8,29 +8,29 @@ import "proto/common/date.proto";
 import "proto/operation/operation.proto";
 
 message Action {
-	string      number       = 1;
-	string      vin          = 2;
-	string      brand        = 3;
-	string      model        = 4;
-	int32       year         = 5;
-	int32       capacity     = 6;
-	string      color        = 7;
-	string      fuel         = 8;
-	string      kind         = 9;
-    common.Date date         = 10;
-	int32       own_weight   = 11;
-    int32       total_weight = 12;
+  string      number       = 1;
+  string      vin          = 2;
+  string      brand        = 3;
+  string      model        = 4;
+  int32       year         = 5;
+  int32       capacity     = 6;
+  string      color        = 7;
+  string      fuel         = 8;
+  string      kind         = 9;
+  common.Date date         = 10;
+  int32       own_weight   = 11;
+  int32       total_weight = 12;
 
-	// Operation:
-    string                 body       = 13;
-    string                 purpose    = 14;
-    operation.RecordAction action     = 15;
-    operation.Department   department = 16;
-    operation.Owner        owner      = 17;
+  // Operation:
+  string                 body       = 13;
+  string                 purpose    = 14;
+  operation.RecordAction action     = 15;
+  operation.Department   department = 16;
+  operation.Owner        owner      = 17;
 
-	// Registration:
-    string      code           = 18;
-    int32       num_seating    = 19;
-	common.Date first_reg_date = 20;
-	string      category       = 21;
+  // Registration:
+  string      code           = 18;
+  int32       num_seating    = 19;
+  common.Date first_reg_date = 20;
+  string      category       = 21;
 }
