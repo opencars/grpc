@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package auction;
+
+option go_package = "github.com/opencars/grpc/pkg/auction";
+
+import "proto/auction/auction.proto";
+
+service Service {
+    rpc ListByVIN(ListByVINRequest) returns (ListByVINResponse) {}
+}
+
+message ListByVINRequest {
+    string vin = 1;
+}
+
+message ListByVINResponse {
+    repeated Auction auction = 1;
+}
