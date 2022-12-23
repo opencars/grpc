@@ -10,10 +10,10 @@ import "proto/core/action.proto";
 
 service CustomerService {
     rpc FindByNumber(NumberRequestByCustomer) returns (ResultForCustomer) {
-        option (google.api.http) = { get: "/v1/customer/vehicles" };
+        option (google.api.http) = { get: "/api/v1/customer/vehicles" };
     }
     rpc FindByVIN(VINRequestByCustomer) returns (ResultForCustomer) {
-        option (google.api.http) = { get: "/v1/customer/vehicles" };
+        option (google.api.http) = { get: "/api/v1/customer/vehicles/{vin}" };
     }
 }
 
