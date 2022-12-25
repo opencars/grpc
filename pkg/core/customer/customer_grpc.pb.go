@@ -14,122 +14,122 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// CustomerServiceClient is the client API for CustomerService service.
+// VehicleServiceClient is the client API for VehicleService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type CustomerServiceClient interface {
+type VehicleServiceClient interface {
 	FindByNumber(ctx context.Context, in *FinByNumberRequest, opts ...grpc.CallOption) (*FindByNumberResponse, error)
 	FindByVIN(ctx context.Context, in *FindByVinRequest, opts ...grpc.CallOption) (*FindByVinResponse, error)
 }
 
-type customerServiceClient struct {
+type vehicleServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewCustomerServiceClient(cc grpc.ClientConnInterface) CustomerServiceClient {
-	return &customerServiceClient{cc}
+func NewVehicleServiceClient(cc grpc.ClientConnInterface) VehicleServiceClient {
+	return &vehicleServiceClient{cc}
 }
 
-func (c *customerServiceClient) FindByNumber(ctx context.Context, in *FinByNumberRequest, opts ...grpc.CallOption) (*FindByNumberResponse, error) {
+func (c *vehicleServiceClient) FindByNumber(ctx context.Context, in *FinByNumberRequest, opts ...grpc.CallOption) (*FindByNumberResponse, error) {
 	out := new(FindByNumberResponse)
-	err := c.cc.Invoke(ctx, "/core.customer.CustomerService/FindByNumber", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/core.customer.VehicleService/FindByNumber", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *customerServiceClient) FindByVIN(ctx context.Context, in *FindByVinRequest, opts ...grpc.CallOption) (*FindByVinResponse, error) {
+func (c *vehicleServiceClient) FindByVIN(ctx context.Context, in *FindByVinRequest, opts ...grpc.CallOption) (*FindByVinResponse, error) {
 	out := new(FindByVinResponse)
-	err := c.cc.Invoke(ctx, "/core.customer.CustomerService/FindByVIN", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/core.customer.VehicleService/FindByVIN", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// CustomerServiceServer is the server API for CustomerService service.
-// All implementations must embed UnimplementedCustomerServiceServer
+// VehicleServiceServer is the server API for VehicleService service.
+// All implementations must embed UnimplementedVehicleServiceServer
 // for forward compatibility
-type CustomerServiceServer interface {
+type VehicleServiceServer interface {
 	FindByNumber(context.Context, *FinByNumberRequest) (*FindByNumberResponse, error)
 	FindByVIN(context.Context, *FindByVinRequest) (*FindByVinResponse, error)
-	mustEmbedUnimplementedCustomerServiceServer()
+	mustEmbedUnimplementedVehicleServiceServer()
 }
 
-// UnimplementedCustomerServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedCustomerServiceServer struct {
+// UnimplementedVehicleServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedVehicleServiceServer struct {
 }
 
-func (UnimplementedCustomerServiceServer) FindByNumber(context.Context, *FinByNumberRequest) (*FindByNumberResponse, error) {
+func (UnimplementedVehicleServiceServer) FindByNumber(context.Context, *FinByNumberRequest) (*FindByNumberResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FindByNumber not implemented")
 }
-func (UnimplementedCustomerServiceServer) FindByVIN(context.Context, *FindByVinRequest) (*FindByVinResponse, error) {
+func (UnimplementedVehicleServiceServer) FindByVIN(context.Context, *FindByVinRequest) (*FindByVinResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FindByVIN not implemented")
 }
-func (UnimplementedCustomerServiceServer) mustEmbedUnimplementedCustomerServiceServer() {}
+func (UnimplementedVehicleServiceServer) mustEmbedUnimplementedVehicleServiceServer() {}
 
-// UnsafeCustomerServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to CustomerServiceServer will
+// UnsafeVehicleServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to VehicleServiceServer will
 // result in compilation errors.
-type UnsafeCustomerServiceServer interface {
-	mustEmbedUnimplementedCustomerServiceServer()
+type UnsafeVehicleServiceServer interface {
+	mustEmbedUnimplementedVehicleServiceServer()
 }
 
-func RegisterCustomerServiceServer(s grpc.ServiceRegistrar, srv CustomerServiceServer) {
-	s.RegisterService(&CustomerService_ServiceDesc, srv)
+func RegisterVehicleServiceServer(s grpc.ServiceRegistrar, srv VehicleServiceServer) {
+	s.RegisterService(&VehicleService_ServiceDesc, srv)
 }
 
-func _CustomerService_FindByNumber_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _VehicleService_FindByNumber_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(FinByNumberRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CustomerServiceServer).FindByNumber(ctx, in)
+		return srv.(VehicleServiceServer).FindByNumber(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/core.customer.CustomerService/FindByNumber",
+		FullMethod: "/core.customer.VehicleService/FindByNumber",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CustomerServiceServer).FindByNumber(ctx, req.(*FinByNumberRequest))
+		return srv.(VehicleServiceServer).FindByNumber(ctx, req.(*FinByNumberRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CustomerService_FindByVIN_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _VehicleService_FindByVIN_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(FindByVinRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CustomerServiceServer).FindByVIN(ctx, in)
+		return srv.(VehicleServiceServer).FindByVIN(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/core.customer.CustomerService/FindByVIN",
+		FullMethod: "/core.customer.VehicleService/FindByVIN",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CustomerServiceServer).FindByVIN(ctx, req.(*FindByVinRequest))
+		return srv.(VehicleServiceServer).FindByVIN(ctx, req.(*FindByVinRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// CustomerService_ServiceDesc is the grpc.ServiceDesc for CustomerService service.
+// VehicleService_ServiceDesc is the grpc.ServiceDesc for VehicleService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var CustomerService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "core.customer.CustomerService",
-	HandlerType: (*CustomerServiceServer)(nil),
+var VehicleService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "core.customer.VehicleService",
+	HandlerType: (*VehicleServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "FindByNumber",
-			Handler:    _CustomerService_FindByNumber_Handler,
+			Handler:    _VehicleService_FindByNumber_Handler,
 		},
 		{
 			MethodName: "FindByVIN",
-			Handler:    _CustomerService_FindByVIN_Handler,
+			Handler:    _VehicleService_FindByVIN_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
