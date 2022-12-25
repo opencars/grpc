@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package core.customer;
+
+option go_package = "github.com/opencars/grpc/pkg/core/customer";
+
+import "google/api/annotations.proto";
+import "proto/core/action.proto";
+
+service CustomerService {
+    rpc FindByNumber(FinByNumberRequest) returns (FindByNumberResponse) {
+        option (google.api.http) = { get: "/api/v1/customer/vehicles" };
+    }
+    rpc FindByVIN(FindByVinRequest) returns (FindByVinResponse) {
+        option (google.api.http) = { get: "/api/v1/customer/vehicles/{vin}" };
+    }
+}
+
+message FinByNumberRequest {
+    string number = 1;
+}
+
+message FindByVinRequest {
+    string vin = 1;
+}
+
+message Vehicle {
+    string          vin     = 1;
+    string          brand   = 2;
+    string          model   = 3;
+    int32           year    = 4;
+    repeated Action actions = 5;
+}
+
+message FindByNumberResponse {
+    repeated Vehicle vehicles = 1;
+}
+
+message FindByVinResponse {
+    Vehicle vehicles = 1;
+}
