@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package registration.v1;
+
+import "registration/v1/registration.proto";
+
+service Service {
+  rpc FindByNumber(FindByNumberRequest) returns (FindByNumberResponse) {}
+  rpc FindByVIN(FindByVINRequest) returns (FindByVINResponse) {}
+  rpc FindByCode(FindByCodeRequest) returns (FindByCodeResponse) {}
+}
+
+message FindByNumberRequest {
+  string number = 1;
+}
+
+message FindByVINRequest {
+  string vin = 1;
+}
+
+message FindByCodeRequest {
+  string code = 1;
+}
+
+message FindByNumberResponse {
+  repeated Record registrations = 1;
+}
+
+message FindByVINResponse {
+  repeated Record registrations = 1;
+}
+
+message FindByCodeResponse {
+  repeated Record registrations = 1;
+}

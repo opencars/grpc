@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package operation.v1;
+
+import "operation/v1/operation.proto";
+
+service Service {
+  rpc FindByNumber(FindByNumberRequest) returns (FindByNumberResponse) {}
+  rpc FindByVIN(FindByVINRequest) returns (FindByVINResponse) {}
+}
+
+message FindByNumberRequest {
+  string number = 1;
+}
+
+message FindByVINRequest {
+  string vin = 1;
+}
+
+message FindByNumberResponse {
+  repeated Record operations = 1;
+}
+
+message FindByVINResponse {
+  repeated Record operations = 1;
+}

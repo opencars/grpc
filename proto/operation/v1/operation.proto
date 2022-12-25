@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package operation.v1;
+
+import "common/v1/date.proto";
+
+message Department {
+  int32 code = 1;
+  string name = 2;
+}
+
+message Owner {
+  enum Entity {
+    ENTITY_UNKNOWN = 0;
+    ENTITY_INDIVIDUAL = 1;
+    ENTITY_LEGAL = 2;
+  }
+
+  message Territory {
+    string code = 1;
+    string summary = 2;
+  }
+
+  Entity entity = 1;
+  Territory registration = 2;
+}
+
+message Record {
+  string number = 1;
+  string vin = 16;
+  string brand = 2;
+  string model = 3;
+  int32 year = 4;
+  int32 capacity = 5;
+  string color = 6;
+  string fuel = 7;
+  string kind = 8;
+  string body = 9;
+  string purpose = 10;
+  int32 own_weight = 11;
+  int32 total_weight = 12;
+  RecordAction action = 17;
+  common.v1.Date date = 13;
+  Department department = 14;
+  Owner owner = 15;
+}
+
+message RecordAction {
+  int32 code = 1;
+  string title = 2;
+}

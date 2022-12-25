@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package vin_decoding.v1;
+
+import "common/v1/error.proto";
+
+service Service {
+  rpc Decode(DecodeRequest) returns (DecodeResponse);
+}
+
+message DecodeRequest {
+  repeated string vins = 1;
+}
+
+message DecodeResponse {
+  repeated DecodeResultItem items = 1;
+}
+
+message DecodeResultItem {
+  Vehicle vehicle = 1;
+  DecodedVIN decoded_vin = 2;
+  common.v1.Error error = 3;
+}
+
+message DecodedVIN {
+  string vds = 1;
+  string vis = 2;
+  string wmi = 3;
+}
+
+message Vehicle {
+  bool check = 1;
+  string country = 2;
+  string manufacturer = 3;
+  string region = 4;
+  uint32 year = 5;
+}

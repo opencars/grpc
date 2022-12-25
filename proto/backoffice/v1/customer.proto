@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package backoffice.v1;
+
+service CustomerService {
+  rpc FindById(FindByIdRequest) returns (FindByIdResponse) {}
+}
+
+message FindByIdRequest {
+  string id = 1;
+}
+
+message FindByIdResponse {
+  string id = 1;
+  string name = 2;
+  string contact_person = 3;
+}

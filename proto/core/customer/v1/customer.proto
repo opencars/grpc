@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package core.customer.v1;
+
+import "common/v1/date.proto";
+import "core/v1/action.proto";
+import "google/api/annotations.proto";
+
+service CustomerService {
+  rpc FindByNumber(FindByNumberRequest) returns (FindByNumberResponse) {
+    option (google.api.http) = {get: "/api/v1/customer/vehicles"};
+  }
+  rpc FindByVIN(FindByVINRequest) returns (FindByVINResponse) {
+    option (google.api.http) = {get: "/api/v1/customer/vehicles/{vin}"};
+  }
+}
+
+message FindByNumberRequest {
+  string number = 1;
+}
+
+message FindByVINRequest {
+  string vin = 1;
+}
+
+message FindByNumberResponse {
+  repeated Vehicle vehicles = 1;
+}
+
+message FindByVINResponse {
+  Vehicle vehicle = 1;
+}
+
+message Vehicle {
+  string vin = 1;
+  common.v1.Date first_reg_date = 2;
+  string brand = 3;
+  string model = 4;
+  int32 year = 5;
+  repeated core.v1.Action actions = 6;
+}

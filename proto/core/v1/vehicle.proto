@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package core.v1;
+
+import "common/v1/date.proto";
+import "core/v1/action.proto";
+import "core/v1/advertisement.proto";
+import "operation/v1/operation.proto";
+import "registration/v1/registration.proto";
+import "vin_decoding/v1/vin_decoding.proto";
+
+service VehicleService {
+  rpc FindByNumber(FindByNumberRequest) returns (FindByNumberResponse) {}
+  rpc FindByVIN(FindByVINRequest) returns (FindByVINResponse) {}
+}
+
+message FindByNumberRequest {
+  string number = 1;
+}
+
+message FindByVINRequest {
+  string vin = 1;
+}
+
+message Vin {
+  string value = 1;
+  vin_decoding.v1.Vehicle vehicle = 2;
+  vin_decoding.v1.DecodedVIN decoded_vin = 3;
+}
+
+message Vehicle {
+  Vin vin = 1;
+  common.v1.Date first_reg_date = 2;
+  string brand = 3;
+  string model = 4;
+  int32 year = 5;
+
+  repeated registration.v1.Record registrations = 6;
+  repeated operation.v1.Record operations = 7;
+  repeated Advertisement advertisements = 8;
+  repeated Action actions = 9;
+}
+
+message FindByNumberResponse {
+  repeated Vehicle vehicles = 1;
+}
+
+message FindByVINResponse {
+  repeated Vehicle vehicles = 1;
+}

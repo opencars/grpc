@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package koatuu.v1;
+
+import "common/v1/error.proto";
+
+service Service {
+  rpc Decode(DecodeRequest) returns (DecodeResponse);
+}
+
+message DecodeRequest {
+  repeated string codes = 1;
+}
+
+message DecodeResponse {
+  repeated DecodeResultItem items = 1;
+}
+
+message DecodeResultItem {
+  string summary = 1;
+  repeated string parts = 2;
+  common.v1.Error error = 3;
+}

@@ -1,0 +1,90 @@
+syntax = "proto3";
+
+package core.v1;
+
+import "google/protobuf/timestamp.proto";
+
+message Advertisement {
+  enum Fuel {
+    FUEL_UNKNOWN = 0;
+    FUEL_GASOLINE = 1;
+    FUEL_DIESEL = 2;
+    FUEL_GAS = 3;
+    FUEL_GAS_GASOLINE = 4;
+    FUEL_HYBRID = 5;
+    FUEL_ELECTRIC = 6;
+    FUEL_PROPANE = 7;
+    FUEL_METHANE = 8;
+    FUEL_OTHER = 9;
+  }
+
+  enum Gearbox {
+    GEARBOX_UNKNOWN = 0;
+    GEARBOX_AUTOMATIC = 1;
+    GEARBOX_MANUAL = 2;
+    GEARBOX_MANUMATIC = 3;
+    GEARBOX_VARIATOR = 4;
+    GEARBOX_AMT = 5;
+    GEARBOX_OTHER = 6;
+  }
+
+  enum WheelDrive {
+    WHEEL_DRIVE_UNKNOWN = 0;
+    WHEEL_DRIVE_REAR = 1;
+    WHEEL_DRIVE_FRONT = 2;
+    WHEEL_DRIVE_ALL = 3;
+  }
+
+  enum Category {
+    CATEGORY_UNKNOWN = 0;
+    CATEGORY_CAR = 1;
+    CATEGORY_TRUCK = 2;
+    CATEGORY_MOTO = 3;
+    CATEGORY_BUS = 4;
+    CATEGORY_WATER = 5;
+    CATEGORY_AIR = 6;
+    CATEGORY_CAMPER = 7;
+    CATEGORY_TRAILER = 8;
+    CATEGORY_SPECIAL = 9;
+  }
+
+  enum Body {
+    BODY_UNKNOWN = 0;
+    BODY_SEDAN = 1;
+    BODY_CROSSOVER = 2;
+    BODY_MINIVAN = 3;
+    BODY_HATCHBACK = 4;
+    BODY_WAGON = 5;
+    BODY_COUPE = 6;
+    BODY_CONVERTIBLE = 7;
+    BODY_PICKUP = 8;
+    BODY_LIMOUSINE = 9;
+    BODY_LIGHTTRUCK = 10;
+    BODY_OTHER = 11;
+  }
+
+  uint32 id = 1;
+  string resource = 2;
+  string brand = 3;
+  string model = 4;
+  Category category = 5;
+  string title = 6;
+  bool is_verified = 7;
+  string url = 8;
+  uint32 price = 9;
+  repeated string image_urls = 10;
+  google.protobuf.Timestamp last_seen_at = 11;
+  google.protobuf.Timestamp published_at = 12;
+  google.protobuf.Timestamp scraped_at = 13;
+  google.protobuf.Timestamp updated_at = 14;
+  uint32 year = 15;
+  Gearbox gearbox = 16;
+  WheelDrive wheel_drive = 17;
+  double engine_capacity = 18;
+  Fuel fuel = 19;
+  uint32 mileage = 20;
+  Body body = 21;
+  bool is_customs_cleared = 22;
+  string vin = 23;
+  string number = 24;
+}

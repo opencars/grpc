@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package auction.v1;
+
+import "auction/v1/auction.proto";
+
+service Service {
+  rpc ListByVIN(ListByVINRequest) returns (ListByVINResponse) {}
+}
+
+message ListByVINRequest {
+  string vin = 1;
+}
+
+message ListByVINResponse {
+  repeated Auction auction = 1;
+}

@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-package common;
-
-option go_package = "github.com/opencars/grpc/pkg/common";
-
-message Error {
-    repeated string messages = 1;
-}

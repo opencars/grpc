@@ -1,0 +1,23 @@
+version: v1
+managed:
+  enabled: true
+  go_package_prefix:
+    default: github.com/opencars/grpc/pkg
+    except:
+      - buf.build/googleapis/googleapis
+plugins:
+  - plugin: go
+    out: pkg
+    opt: paths=source_relative
+  - plugin: go-grpc
+    out: pkg
+    opt:
+      - paths=source_relative
+      - require_unimplemented_servers=false
+  - name: openapiv2
+    out: docs
+    strategy: all
+    opt:
+      - allow_merge=true
+      - merge_file_name=docs
+      - disable_service_tags=true
