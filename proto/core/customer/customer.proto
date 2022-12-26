@@ -5,6 +5,7 @@ package core.customer;
 option go_package = "github.com/opencars/grpc/pkg/core/customer";
 
 import "google/api/annotations.proto";
+import "google/rpc/error_details.proto";
 import "proto/core/action.proto";
 
 service VehicleService {
