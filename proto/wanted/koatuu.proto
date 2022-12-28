@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package wanted;
+
+option go_package = "github.com/opencars/grpc/pkg/wanted";
+
+import "proto/common/date.proto";
+
+service Service {
+    rpc Find(FindRequest) returns (FindResponse);
+}
+
+message FindRequest {
+    repeated string number = 1;
+    repeated string vin    = 2;
+}
+
+message FindResponse {
+    Record record = 1;
+}
+
+message Record {
+    enum Status {
+        STATUS_UNKNOWN = 0;
+        STATUS_STOLEN  = 1;
+        STATUS_REMOVED = 2;
+    }
+
+    string id = 1;
+    string title = 2;
+    string brand = 3;
+    string model = 4;
+    string color = 5;
+    string number = 6;
+    string body_number = 7;
+    string chassis_number = 8;
+    string engine_number = 9;
+    string ovd = 10;
+    string kind = 11;
+    Status status = 12;
+    string revision_id = 13;
+    common.Date theft_date = 14;
+    common.Date insert_date = 15;
+}
