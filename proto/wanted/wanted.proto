@@ -16,10 +16,10 @@ message FindRequest {
 }
 
 message FindResponse {
-    Record record = 1;
+    repeated Vehicle vehicles = 1;
 }
 
-message Record {
+message Vehicle {
     enum Status {
         STATUS_UNKNOWN = 0;
         STATUS_STOLEN  = 1;

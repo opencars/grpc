@@ -97,5 +97,5 @@ var Service_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/wanted/koatuu.proto",
+	Metadata: "proto/wanted/wanted.proto",
 }
