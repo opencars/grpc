@@ -11,8 +11,8 @@ service Service {
 }
 
 message FindRequest {
-    repeated string number = 1;
-    repeated string vin    = 2;
+    repeated string numbers = 1;
+    repeated string vins    = 2;
 }
 
 message FindResponse {
