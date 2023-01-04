@@ -10,6 +10,7 @@ import "proto/common/date.proto";
 import "proto/operation/operation.proto";
 import "proto/registration/registration.proto";
 import "proto/vin_decoding/vin_decoding.proto";
+import "proto/wanted/wanted.proto";
 
 import "proto/core/action.proto";
 
@@ -43,6 +44,7 @@ message Vehicle {
     repeated operation.Record operations       = 7;
     repeated Advertisement advertisements      = 8;
     repeated Action actions = 9;
+    repeated wanted.Vehicle wanted = 10;
 }
 
 message Result {
