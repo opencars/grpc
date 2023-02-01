@@ -35,6 +35,7 @@ message Vehicle {
     string body_number = 7;
     string chassis_number = 8;
     string engine_number = 9;
+    string vin = 16;
     string ovd = 10;
     string kind = 11;
     Status status = 12;
